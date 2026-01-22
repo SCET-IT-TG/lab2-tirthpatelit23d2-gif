@@ -1,0 +1,49 @@
+// Connect to Database
+db = db.getSiblingDB("companyDB");
+
+/* -------------------------------------------------
+       Exercise 1: Data Setup (Database & Collection)
+    ------------------------------------------------- */
+db.employees.insertMany([
+    { name: "Rahul", department: "IT", salary: 60000, age: 28 },
+    { name: "Amit", department: "HR", salary: 25000, age: 24 },
+    { name: "Sneha", department: "Sales", salary: 45000, age: 32 },
+    { name: "Priya", department: "IT", salary: 80000, age: 35 },
+    { name: "Karan", department: "Sales", salary: 30000, age: 22 }
+]);
+
+ 
+    /* -------------------------------------------------
+       Exercise 2: Simple Find Prerequisites
+       (Check if "IT" and "Rahul" exist so queries work)
+    ------------------------------------------------- */
+
+db.employees.find({ department: "IT" });
+db.employees.find({ name: "Rahul" });
+
+/* -------------------------------------------------
+       Exercise 3: Distinct Prerequisites
+       (Check if there are multiple departments)
+    ------------------------------------------------- */
+db.employees.find().pretty();
+db.employees.distinct("department");
+
+ /* -------------------------------------------------
+       Exercise 4: Salary Analysis Data ($gt, $lt)
+       (Check if salaries > 50000 and < 30000 exist)
+    ------------------------------------------------- */
+db.employees.find({ salary: { $gt: 50000 } });
+db.employees.find({ salary: { $lt: 30000 } });
+
+/* -------------------------------------------------
+       Exercise 5: Age Filtering Data ($gte, $lte)
+       (Check if age >= 30 and <= 25 exist)
+    ------------------------------------------------- */
+db.employees.find({ age: { $gte: 30 } });
+db.employees.find({ age: { $lte: 25 } });
+
+/* -------------------------------------------------
+       Exercise 6: Range Query Data
+       (Check if salary between 40k and 80k exists)
+    ------------------------------------------------- */
+db.employees.find({ salary: { $gte: 40000, $lte: 80000 } });
